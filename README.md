@@ -1,4 +1,4 @@
-# Sphynx: Dynamically Testing and Perplexing SOTA Hallucination Detection Models
+# Sphynx: Dynamically Testing and Perplexing Leading Hallucination Detection Models
 
 A perennial challenge for AI applications is the *hallucination problem.* Everybody knows this: nobody wants LLMs that act up and spit out incorrect or undesired behaviors. 
 
@@ -12,7 +12,7 @@ Well, it's probably time to *[haize](https://haizelabs.com/)* these models to fi
 
 ## Searching for Similar, Perplexing Questions
 
-A hallucination detection model can reasonably take in as input three variables: `question`, `answer`, and `context`. It spits out one of two outputs: `PASS` or `FAIL`. `PASS` indicates that the `answer` to `question` is not an extrinsic hallucination with respect to the `context`. `FAIl` means that `answer` was a hallucination.
+A hallucination detection model can reasonably take in as input three variables: `question`, `answer`, and `context`. It spits out one of two outputs: `PASS` or `FAIL`. `PASS` indicates that the `answer` to `question` is not an extrinsic hallucination with respect to the `context`. `FAIL` means that `answer` was a hallucination.
 
 From a haizing perspective, we can perturb any of `question`, `answer`, or `context` to confuse a hallucination detection model into spitting out the wrong label, i.e. `FAIL` instead of `PASS` or vice versa. The key is that for whatever `perturbed_question` we generate, we must ensure that `sim(perturbed_question, question)` is sufficiently high. Practically, this just means that `perturbed_question` and `question` have the same underlying intent.
 
@@ -77,7 +77,7 @@ Consider the following results (higher is better) on a random 100 question & adv
 | Question Robustness | 50% | 42% | 33% | 21% |
 | Variant Robustness | 52.63% | 48.34% | 50.28% | 31.99% |
 
-These scores measure how robust a hallucination detector is with respect to the "gotchas" as described above. The hire the robustness score, the better. Question Robustness measures if the hallucination detector prevents *all* of the adversarial attacks with respect to a question; Variant Robustness measures if the detector prevents a *particular* adversarial attack with respect to a question.
+These scores measure how robust a hallucination detector is with respect to the "gotchas" as described above. The higher the robustness score, the better. Question Robustness measures if the hallucination detector prevents *all* of the adversarial attacks with respect to a question; Variant Robustness measures if the detector prevents a *particular* adversarial attack with respect to a question.
 
 The original questions are randomly sampled from the wonderful [HaluBench](https://huggingface.co/datasets/PatronusAI/HaluBench). Our adversarial attacks can be found in `sphynx_halluce_induce.json`. 
 
@@ -104,6 +104,8 @@ As we roll out AI in high-stakes use cases, it is critical that we be a bit more
 
 As we enter this new era, it's pretty evident that static dataset approaches to building and testing models are probably not going to cut it. As is clear in this particular setting, SOTA hallucination detection models can perform *great* (80%+ robustness) on *static* datasets, but are pretty much decimated by minimally sophisticated *dynamic* testing approaches like Sphynx.
 
-The haizing mission is inspired precisely such observations. The mission is to bring the art of dynamic and powerful fuzz-testing to address the wonkiness and brittleness of LLM-land. Only by rigorously, scalably, and automatically testing your models to understand all of their corner cases and weaknesses can you even begin to remediate such weaknesses.
+Rather than wait for your application (e.g. hallucination detector) to fail out in the wild, haizing *forces* these failures to happen in development. Our haizing system (our actual product, not the one shown here) can efficiently generate many samples with minor variations corresponding to different user’s queries to stress-test your system.
+
+The haizing mission is inspired by precisely such observations and ideals. The mission is to bring the art of dynamic and powerful fuzz-testing to address the wonkiness and brittleness of LLM-land. Only by rigorously, scalably, and automatically testing your models to understand all of their corner cases and weaknesses can you even begin to remediate such weaknesses.
 
 Only by haizing can you achieve truly reliable AI systems.
