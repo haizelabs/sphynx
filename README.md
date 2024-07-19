@@ -1,5 +1,14 @@
 # Sphynx: Dynamically Testing and Perplexing Leading Hallucination Detection Models
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Searching for Similar, Perplexing Questions](#searching-for-similar-perplexing-questions)
+3. [A Stupidly Simple Haizing Algorithm](#a-stupidly-simple-haizing-algorithm)
+4. [Perplexing Leading Hallucination Detection Models](#perplexing-sota-hallucination-detection-models)
+5. [Haizing Leads to Robustness](#haizing-leads-to-robustness)
+
+## Introduction
+
 A perennial challenge for AI applications is the *hallucination problem.* Everybody knows this: nobody wants LLMs that act up and spit out incorrect or undesired behaviors. 
 
 Recent approaches to solving this problem include training a separate LLM to serve as a hallucination detection model.
@@ -26,13 +35,13 @@ Now consider this very subtle rephrasing:
 
 > *What Indian director's eldest child directed the film Paap?*
 
-Obviously the answer to both questions -- `Mahesh Bhatt` -- is the same. But *the slight shift in question phrasing* caused a "SOTA" hallucination detector to think that Mahesh Bhatt is a valid answer to the original question, but a *hallucination* with respect to the second question.
+Obviously the answer to both questions -- `Mahesh Bhatt` -- is the same. But *the slight shift in question phrasing* caused a "leading" hallucination detector to think that Mahesh Bhatt is a valid answer to the original question, but a *hallucination* with respect to the second question.
 
 That seems not very desirable...we call that a `gotcha`! 
 
 ## A Stupidly Simple Haizing Algorithm
 
-So how do we search for such gotchas? Well, it turns out an extremely beam search (almost random search) method can wreak havoc on these hallucination detection models. Essentially, the idea is to fuzz-test the hallucination detector by mining for "rephrasings" of the original question that inch closer to the `PASS`/`FAIL` decision boundary. 
+So how do we search for such gotchas? Well, it turns out an extremely simple beam search (almost random search) method can wreak havoc on these hallucination detection models. Essentially, the idea is to fuzz-test the hallucination detector by mining for "rephrasings" of the original question that inch closer to the `PASS`/`FAIL` decision boundary. 
 
 Crossing the boundary -- i.e. flipping the label -- while preserving the original question's intent means we've elicited a failure case of the hallucination detector. Canonically, such a manifestation is called an adversarial attack.
 
@@ -66,7 +75,7 @@ END FUNCTION
 
 For full details, check out `beam.py`.
 
-## Perplexing SOTA Hallucination Detection Models
+## Perplexing Leading Hallucination Detection Models
 
 As you can tell, nothing crazy is happening on the algorithmic side! And yet, this simple procedure is able to elicit a wide range of failure modes, showcasing their (lack of) robustness.
 
@@ -102,9 +111,9 @@ So what's the point of all this?
 
 As we roll out AI in high-stakes use cases, it is critical that we be a bit more thoughtful in dealing with the brittleness and stochasticity of these systems.
 
-As we enter this new era, it's pretty evident that static dataset approaches to building and testing models are probably not going to cut it. As is clear in this particular setting, SOTA hallucination detection models can perform *great* (80%+ robustness) on *static* datasets, but are pretty much decimated by minimally sophisticated *dynamic* testing approaches like Sphynx.
+As we enter this new era, it's pretty evident that static dataset approaches to building and testing models are probably not going to cut it. As is clear in this particular setting, leading hallucination detection models can perform *great* (80%+ robustness) on *static* datasets, but are pretty much decimated by minimally sophisticated *dynamic* testing approaches like Sphynx.
 
-Rather than wait for your application (e.g. hallucination detector) to fail out in the wild, haizing *forces* these failures to happen in development. Our haizing system (our actual product, not the one shown here) can efficiently generate many samples with minor variations corresponding to different user’s queries to stress-test your system.
+Rather than wait for your application (e.g. hallucination detector) to fail out in the wild, haizing *forces* these failures to happen in development. Haizing can efficiently generate many samples with minor variations corresponding to different user’s queries to stress-test your system.
 
 The haizing mission is inspired by precisely such observations and ideals. The mission is to bring the art of dynamic and powerful fuzz-testing to address the wonkiness and brittleness of LLM-land. Only by rigorously, scalably, and automatically testing your models to understand all of their corner cases and weaknesses can you even begin to remediate such weaknesses.
 
