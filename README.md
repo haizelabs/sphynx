@@ -86,7 +86,7 @@ Consider the following results (higher is better) on a random 100 question & adv
 <p align="center">
 
 | **Metric**             | **GPT-4o (OpenAI)** | **Claude-3.5-Sonnet (Anthropic)** | **Llama 3 (Meta)** | **Lynx (Patronus AI)** |
-|------------------------|------------|----------------|-------------|------------------------|
+|------------------------|:------------:|:----------------:|:-------------:|:------------------------:|
 | **Question Robustness**| 50%        | 42%            | 33%         | 21%                    |
 | **Variant Robustness** | 52.63%     | 48.34%         | 50.28%      | 31.99%                 |
 
