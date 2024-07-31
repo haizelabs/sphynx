@@ -1,4 +1,4 @@
-# Sphynx: Dynamically Testing Hallucination Detection Models
+# Sphynx: Fuzz Testing Hallucination Detection Models
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -83,10 +83,14 @@ Consider the following results (higher is better) on a random 100 question & adv
 
 <br><br>
 
+<p align="center">
+
 | **Metric**             | **GPT-4o** | **Claude-3.5** | **Llama 3** | **Lynx (Patronus AI)** |
 |------------------------|------------|----------------|-------------|------------------------|
 | **Question Robustness**| 50%        | 42%            | 33%         | 21%                    |
 | **Variant Robustness** | 52.63%     | 48.34%         | 50.28%      | 31.99%                 |
+
+</p>
 
 <br><br>
 
