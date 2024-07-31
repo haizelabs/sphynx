@@ -1,4 +1,4 @@
-# Sphynx: Dynamically Testing and Perplexing Leading Hallucination Detection Models
+# Sphynx: Dynamically Testing Hallucination Detection Models
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -81,10 +81,19 @@ As you can tell, nothing crazy is happening on the algorithmic side! And yet, th
 
 Consider the following results (higher is better) on a random 100 question & adversarial subset of haizing artifacts our beam search algorithm produced.
 
-| Metric     |     GPT-4o |  Claude-3.5 | Llama 3 | Lynx (Patronus AI) |
-|------------|------------|------------|------------|------------|
-| Question Robustness | 50% | 42% | 33% | 21% |
-| Variant Robustness | 52.63% | 48.34% | 50.28% | 31.99% |
+<p>Consider the following results (higher is better) on a random 100 question & adversarial subset of haizing artifacts our beam search algorithm produced.</p>
+
+<div style="padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 10px;">
+
+| Metric               |     GPT-4o   |  Claude-3.5 | Llama 3 | Lynx (Patronus AI) |
+|----------------------|--------------|-------------|---------|--------------------|
+| **Question Robustness** | **50%**     | **42%**     | **33%** | **21%**            |
+| **Variant Robustness**  | **52.63%**  | **48.34%**  | **50.28%** | **31.99%**       |
+
+</div>
+
+<p>These scores measure how robust a hallucination detector is with respect to the "gotchas" as described above. The higher the robustness score, the better. Question Robustness measures if the hallucination detector prevents <em>all</em> of the adversarial attacks with respect to a question; Variant Robustness measures if the detector prevents a <em>particular</em> adversarial attack with respect to a question.</p>
+
 
 These scores measure how robust a hallucination detector is with respect to the "gotchas" as described above. The higher the robustness score, the better. Question Robustness measures if the hallucination detector prevents *all* of the adversarial attacks with respect to a question; Variant Robustness measures if the detector prevents a *particular* adversarial attack with respect to a question.
 
