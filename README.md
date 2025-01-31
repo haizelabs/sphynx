@@ -126,3 +126,13 @@ Rather than wait for your application (e.g. hallucination detector) to fail out 
 The haizing mission is inspired by precisely such observations and ideals. The mission is to bring the art of dynamic and powerful fuzz-testing to address the wonkiness and brittleness of LLM-land. Only by rigorously, scalably, and automatically testing your models to understand all of their corner cases and weaknesses can you even begin to remediate such weaknesses.
 
 Only by haizing can you achieve truly reliable AI systems.
+
+```bibtex
+@misc{sphynx2024,
+  title={Sphynx Hallucination Induction},
+  author={Leonard Tang},
+  year={2024},
+  doi={10.5281/zenodo.13187085},
+  howpublished={\url{https://github.com/haizelabs/sphynx}}
+}
+```
